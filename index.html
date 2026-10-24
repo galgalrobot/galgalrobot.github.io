@@ -371,6 +371,22 @@
         <div class="more">자세히 보기 →</div>
       </article>
 
+      <article class="proj" data-project="purplebpf" tabindex="0" role="button" aria-haspopup="dialog" aria-label="PurpleBPF 자세히 보기">
+        <div class="proj-header">
+          <span class="proj-icon">🟣</span>
+          <h3 class="proj-name">PurpleBPF</h3>
+        </div>
+        <p class="proj-meta">3인 팀 · PM · 데이터 파이프라인</p>
+        <p class="proj-desc">
+          eBPF 기반 컨테이너 런타임 탐지(Tetragon)의 빈틈을 LLM이 만든 공격 시나리오로 자동 검증하는 파이프라인.
+          ATT&amp;CK 기법 697개를 그래프로 적재하고, 공격 생성부터 탐지 판정·커버리지 집계까지 Dagster로 묶었습니다.
+        </p>
+        <div class="proj-tags">
+          <span class="proj-tag">Tetragon · eBPF</span><span class="proj-tag">Neo4j</span><span class="proj-tag">GraphRAG</span><span class="proj-tag">Dagster</span><span class="proj-tag">dbt</span><span class="proj-tag">DuckDB</span><span class="proj-tag">PostgreSQL</span>
+        </div>
+        <div class="more">자세히 보기 →</div>
+      </article>
+
       <article class="proj" data-project="leafy" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Leafy 자세히 보기">
         <div class="proj-header">
           <span class="proj-icon">🪴</span>
@@ -550,6 +566,34 @@
   </ul>
   <h4>기술</h4>
   <div class="proj-tags"><span class="proj-tag">Spring Boot</span><span class="proj-tag">PostgreSQL</span><span class="proj-tag">React 18</span><span class="proj-tag">Vite</span><span class="proj-tag">Tailwind</span><span class="proj-tag">Docker Compose</span><span class="proj-tag">GitHub Actions</span></div>
+</template>
+
+<template id="p-purplebpf" data-title="🟣 PurpleBPF" data-sub="3인 팀 · PM 겸 개발 · 2026 보안 오픈소스 경진대회">
+  <h4>개요</h4>
+  <p>컨테이너 런타임 탐지 규칙이 실제 공격을 얼마나 잡는지 사람이 일일이 확인하기는 어렵습니다. PurpleBPF는 LLM이 ATT&amp;CK 기반 공격 체인을 만들고, 실제 컨테이너에서 실행한 뒤, Tetragon(eBPF)이 잡았는지를 자동으로 판정합니다. 놓친 기법은 다음 라운드의 공격 대상으로 다시 들어가 탐지 커버리지를 점점 넓히는 퍼플팀 방식의 루프입니다.</p>
+  <h4>동작 흐름</h4>
+  <div class="flow"><span>ATT&amp;CK 그래프 (Neo4j)</span><i>→</i><span>GraphRAG + LLM 공격 체인 생성</span><i>→</i><span>컨테이너에서 실행</span><i>→</i><span>Tetragon 탐지 수집</span><i>→</i><span>TP / FN / FP 판정</span><i>→</i><span>놓친 기법 재투입</span></div>
+  <h4>내 역할</h4>
+  <ul>
+    <li><b>PM</b>: 3인 팀 일정과 역할 분담, 공격 측과 탐지 측 인터페이스 정의</li>
+    <li><b>공격 데이터 파이프라인</b>: ATT&amp;CK 지식 그래프 구축, GraphRAG와 LLM(gemma) 기반 공격 체인 생성, 환각 필터, 실행기(Executor)</li>
+    <li><b>탐지 ETL</b>: Tetragon gRPC 이벤트 수집, ATT&amp;CK 태깅 Mapper, 원본 이벤트를 JSONB로 먼저 저장해 매핑이 바뀌어도 재태깅할 수 있게 설계</li>
+    <li><b>커버리지 마트</b>: 실행 로그와 탐지 결과를 조인해 TP/FN/FP를 계산하고, dbt로 정합성 테스트 작성</li>
+    <li><b>오케스트레이션</b>: 공격 실행 → 커버리지 동기화 → dbt 실행·테스트 → 대시보드 생성을 Dagster 워크플로로 자동화</li>
+  </ul>
+  <h4>결과</h4>
+  <div class="metrics">
+    <div class="metric"><div class="metric-val">697</div><div class="metric-label">그래프로 적재한 ATT&amp;CK 기법</div></div>
+    <div class="metric"><div class="metric-val">TP</div><div class="metric-label">T1059.004 탐지 성공</div></div>
+    <div class="metric"><div class="metric-val">FN</div><div class="metric-label">T1611 → 다음 라운드 대상</div></div>
+    <div class="metric"><div class="metric-val">6/6</div><div class="metric-label">dbt 정합성 테스트 통과</div></div>
+  </div>
+  <ul style="margin-top:12px">
+    <li>모든 셸 실행을 잡아 이벤트가 쏟아지던 초기 정책을 "서버 프로세스가 셸을 생성할 때"로 좁힌 정밀 규칙으로 바꿔, 탐지되지 않던 T1059.004를 TP로 전환</li>
+    <li>타임존 불일치로 생긴 조인 누락을 찾아 수정</li>
+  </ul>
+  <h4>기술</h4>
+  <div class="proj-tags"><span class="proj-tag">Tetragon</span><span class="proj-tag">eBPF</span><span class="proj-tag">Neo4j</span><span class="proj-tag">GraphRAG</span><span class="proj-tag">gemma</span><span class="proj-tag">FastAPI</span><span class="proj-tag">Dagster</span><span class="proj-tag">dbt</span><span class="proj-tag">DuckDB</span><span class="proj-tag">Iceberg</span><span class="proj-tag">PostgreSQL</span></div>
 </template>
 
 <template id="p-leafy" data-title="🪴 Leafy" data-sub="팀 프로젝트 · 백엔드">
