@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=860" />
-  <meta name="description" content="Junhui Kwon (권준희) — CS undergraduate at Konkuk University. Cybersecurity, systems programming, infrastructure." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Junhui Kwon (권준희) — Konkuk University CSE. Cloud infrastructure, observability, and data engineering." />
   <meta property="og:title" content="Junhui Kwon 권준희" />
-  <meta property="og:description" content="CS undergraduate @ Konkuk Univ. | Cybersecurity · Systems · Infrastructure" />
+  <meta property="og:description" content="CSE @ Konkuk Univ. | Cloud · Infrastructure · Data" />
   <meta property="og:url" content="https://galgalrobot.github.io/" />
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/113568273?v=4" />
   <title>Junhui Kwon 권준희</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #0d1117;
@@ -19,13 +20,19 @@
       --border: #30363d;
       --border2: #3d444d;
       --text: #e6edf3;
-      --text2: #8d96a0;
-      --text3: #656d76;
+      --text2: #9198a1;
+      --text3: #6e7681;
       --accent: #58a6ff;
-      --accent2: #3fb950;
-      --accent3: #f78166;
-      --mono: 'IBM Plex Mono', monospace;
-      --sans: 'IBM Plex Sans KR', sans-serif;
+      --green: #3fb950;
+      --green-bg: #0d1f18;
+      --green-bd: #1a4229;
+      --blue-bg: #0d1e30;
+      --blue-bd: #1f4b7a;
+      --amber: #d29922;
+      --amber-bg: #2a1f0a;
+      --amber-bd: #5a4110;
+      --mono: 'IBM Plex Mono', ui-monospace, monospace;
+      --sans: 'IBM Plex Sans KR', system-ui, sans-serif;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -35,139 +42,207 @@
       color: var(--text);
       line-height: 1.7;
       font-size: 15px;
+      -webkit-font-smoothing: antialiased;
     }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
 
-    /* layout */
-    .wrap { max-width: 860px; margin: 0 auto; padding: 3rem 2rem 4rem; }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
 
     /* nav */
     nav {
       position: sticky; top: 0; z-index: 100;
       background: rgba(13,17,23,0.85);
       backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--border);
       padding: 0 2rem;
     }
     .nav-inner {
-      max-width: 860px; margin: 0 auto;
+      max-width: 880px; margin: 0 auto;
       display: flex; align-items: center; justify-content: space-between;
-      height: 48px;
+      height: 48px; gap: 1rem;
     }
-    .nav-logo { font-family: var(--mono); font-size: 14px; color: var(--accent2); }
-    .nav-links { display: flex; gap: 1.5rem; }
-    .nav-links a { font-size: 13px; color: var(--text2); }
+    .nav-logo { font-family: var(--mono); font-size: 14px; color: var(--green); white-space: nowrap; }
+    .nav-links { display: flex; gap: 1.25rem; overflow-x: auto; scrollbar-width: none; }
+    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-links a { font-size: 13px; color: var(--text2); white-space: nowrap; }
     .nav-links a:hover { color: var(--text); text-decoration: none; }
 
     /* header */
-    .header { display: flex; gap: 2rem; align-items: flex-start; padding: 2.5rem 0 2.5rem; border-bottom: 1px solid var(--border); }
+    .header { display: flex; gap: 2rem; align-items: flex-start; padding: 1.5rem 0 2.5rem; border-bottom: 1px solid var(--border); }
     .avatar {
-      width: 110px; height: 110px; border-radius: 50%;
+      width: 112px; height: 112px; border-radius: 50%;
       border: 2px solid var(--border2);
-      flex-shrink: 0;
-      overflow: hidden;
-      background: var(--bg2);
+      flex-shrink: 0; overflow: hidden; background: var(--bg2);
     }
-    .avatar img { width: 100%; height: 100%; object-fit: cover; }
-    .header-info { flex: 1; }
-    .name {
-      font-family: var(--mono);
-      font-size: 26px; font-weight: 500;
-      color: var(--text);
-      letter-spacing: -0.5px;
-    }
-    .name-ko { font-family: var(--sans); font-size: 16px; color: var(--text2); font-weight: 300; margin-left: 10px; }
-    .handle { font-family: var(--mono); font-size: 13px; color: var(--accent2); margin-top: 4px; }
-    .meta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 10px; }
-    .meta-item { display: flex; align-items: center; gap: 5px; font-size: 13px; color: var(--text2); }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .header-info { flex: 1; min-width: 0; }
+    .name { font-family: var(--mono); font-size: 26px; font-weight: 500; letter-spacing: -0.5px; line-height: 1.3; }
+    .name-ko { font-family: var(--sans); font-size: 16px; color: var(--text2); font-weight: 300; margin-left: 8px; }
+    .role { font-size: 15px; color: var(--text); margin-top: 6px; font-weight: 500; }
+    .meta { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 8px; }
+    .meta-item { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text2); }
     .meta-item svg { width: 14px; height: 14px; flex-shrink: 0; }
-    .bio { margin-top: 14px; font-size: 14px; color: var(--text2); max-width: 520px; line-height: 1.75; }
-    .icon-links { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+    .bio { margin-top: 14px; font-size: 14px; color: var(--text2); max-width: 580px; line-height: 1.8; }
+    .bio strong { color: var(--text); font-weight: 500; }
+    .icon-links { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
     .icon-link {
       display: inline-flex; align-items: center; gap: 6px;
       font-size: 12px; font-family: var(--mono);
-      padding: 5px 12px;
-      border: 1px solid var(--border2);
-      border-radius: 6px;
-      color: var(--text2);
-      background: var(--bg2);
-      transition: border-color 0.15s, color 0.15s;
+      padding: 5px 12px; border: 1px solid var(--border2); border-radius: 6px;
+      color: var(--text2); background: var(--bg2);
+      transition: border-color .15s, color .15s;
     }
     .icon-link:hover { border-color: var(--accent); color: var(--text); text-decoration: none; }
     .icon-link svg { width: 14px; height: 14px; }
 
     /* sections */
-    section { padding: 2rem 0; border-bottom: 1px solid var(--border); }
+    section { padding: 2.25rem 0; border-bottom: 1px solid var(--border); scroll-margin-top: 56px; }
     section:last-of-type { border-bottom: none; }
     .sec-title {
       font-family: var(--mono); font-size: 12px; font-weight: 500;
-      color: var(--text3); letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text3); letter-spacing: .08em; text-transform: uppercase;
       margin-bottom: 1.25rem;
     }
+    .sec-title::before { content: "## "; color: var(--border2); }
 
-    /* interests */
-    .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    /* skills */
+    .skills { display: grid; grid-template-columns: 110px 1fr; gap: 10px 1.25rem; align-items: baseline; }
+    .skill-label { font-family: var(--mono); font-size: 12px; color: var(--text3); }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
     .tag {
       font-size: 12px; font-family: var(--mono);
-      padding: 3px 10px; border-radius: 4px;
-      border: 1px solid var(--border2);
-      color: var(--text2);
-      background: var(--bg2);
+      padding: 2px 9px; border-radius: 4px;
+      border: 1px solid var(--border2); color: var(--text2); background: var(--bg2);
     }
-    .tag.blue { border-color: #1f4b7a; color: #58a6ff; background: #0d1e30; }
-    .tag.green { border-color: #1a4229; color: #3fb950; background: #0d1f18; }
+    .tag.blue { border-color: var(--blue-bd); color: var(--accent); background: var(--blue-bg); }
+    .tag.green { border-color: var(--green-bd); color: var(--green); background: var(--green-bg); }
 
-    /* projects */
-    .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; }
+    /* featured project */
+    .featured {
+      background: var(--bg2); border: 1px solid var(--border2); border-radius: 10px;
+      padding: 1.5rem 1.5rem 1.25rem; margin-bottom: 14px;
+    }
+    .featured .proj-name { font-size: 16px; }
+    .featured-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 1.5rem; margin-top: 10px; }
+    .featured ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .featured li { font-size: 13.5px; color: var(--text2); padding-left: 16px; position: relative; line-height: 1.65; }
+    .featured li::before { content: "›"; position: absolute; left: 2px; color: var(--green); font-family: var(--mono); }
+    .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-content: start; }
+    .metric { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+    .metric-val { font-family: var(--mono); font-size: 20px; color: var(--text); line-height: 1.2; }
+    .metric-label { font-size: 11.5px; color: var(--text3); margin-top: 3px; line-height: 1.4; }
+    .metric.wide { grid-column: span 2; }
+
+    /* project grid */
+    .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
     .proj {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 8px; padding: 1rem 1.25rem;
-      transition: border-color 0.15s;
-      display: flex; flex-direction: column;
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
+      padding: 1rem 1.2rem; display: flex; flex-direction: column;
+      transition: border-color .15s;
     }
     .proj:hover { border-color: var(--border2); }
-    .proj-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-    .proj-icon { font-size: 18px; }
+    .proj-header { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .proj-icon { font-size: 17px; line-height: 1; }
     .proj-name { font-family: var(--mono); font-size: 14px; font-weight: 500; color: var(--accent); }
-    .proj-desc { font-size: 13px; color: var(--text2); line-height: 1.65; flex: 1; }
-    .proj-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
-    .proj-tag {
-      font-size: 11px; font-family: var(--mono);
-      padding: 1px 7px; border-radius: 3px;
-      background: var(--bg3); color: var(--text3);
-      border: 1px solid var(--border);
+    .badge {
+      font-family: var(--mono); font-size: 10.5px; padding: 1px 7px; border-radius: 10px;
+      border: 1px solid var(--border2); color: var(--text3);
     }
+    .badge.live { color: var(--amber); border-color: var(--amber-bd); background: var(--amber-bg); }
+    .proj-meta { font-size: 12px; color: var(--text3); margin: 4px 0 8px; font-family: var(--mono); }
+    .proj-desc { font-size: 13px; color: var(--text2); line-height: 1.7; flex: 1; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
+    .proj-tag {
+      font-size: 11px; font-family: var(--mono); padding: 1px 7px; border-radius: 3px;
+      background: var(--bg3); color: var(--text3); border: 1px solid var(--border);
+    }
+    .proj-links { display: flex; gap: 12px; margin-top: 10px; font-family: var(--mono); font-size: 12px; }
 
-    /* education / experience */
-    .timeline { display: flex; flex-direction: column; gap: 0; }
+    /* timeline */
     .tl-item { display: flex; gap: 1.5rem; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .tl-item:first-child { padding-top: 0; }
     .tl-item:last-child { border-bottom: none; padding-bottom: 0; }
-    .tl-year { font-family: var(--mono); font-size: 12px; color: var(--text3); width: 90px; flex-shrink: 0; padding-top: 3px; }
-    .tl-content {}
-    .tl-title { font-size: 14px; font-weight: 500; color: var(--text); }
+    .tl-year { font-family: var(--mono); font-size: 12px; color: var(--text3); width: 96px; flex-shrink: 0; padding-top: 3px; }
+    .tl-title { font-size: 14px; font-weight: 500; }
     .tl-sub { font-size: 13px; color: var(--text2); margin-top: 2px; }
     .tl-detail { font-size: 13px; color: var(--text3); margin-top: 4px; line-height: 1.6; }
 
     /* certs */
-    .certs { display: flex; flex-wrap: wrap; gap: 8px; }
-    .cert {
-      font-family: var(--mono); font-size: 12px;
-      padding: 5px 12px; border-radius: 5px;
-      border: 1px solid var(--border2);
-      color: var(--text2); background: var(--bg2);
+    .cert-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+    .cert-group { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.2rem; }
+    .cert-group-title { font-family: var(--mono); font-size: 11.5px; color: var(--text3); margin-bottom: 10px; letter-spacing: .04em; }
+    .cert-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .cert { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+    .cert-name { font-size: 13.5px; color: var(--text); }
+    .cert-code { font-family: var(--mono); font-size: 11px; color: var(--text3); white-space: nowrap; }
+    .cert.new .cert-name::after {
+      content: "NEW"; font-family: var(--mono); font-size: 9.5px; color: var(--green);
+      border: 1px solid var(--green-bd); background: var(--green-bg);
+      border-radius: 3px; padding: 0 4px; margin-left: 6px; vertical-align: 2px;
     }
 
-    /* footer */
-    footer { padding: 2rem 0 0; text-align: center; font-family: var(--mono); font-size: 12px; color: var(--text3); }
 
-    @media (max-width: 600px) {
-      .header { flex-direction: column; }
-      .avatar { width: 80px; height: 80px; }
-      .name { font-size: 20px; }
-      .projects { grid-template-columns: 1fr; }
-      nav { padding: 0 1rem; }
-      .wrap { padding: 2rem 1rem 3rem; }
+    /* clickable cards */
+    [data-project] { cursor: pointer; }
+    [data-project]:hover { border-color: var(--accent); }
+    .more { margin-top: 12px; font-family: var(--mono); font-size: 12px; color: var(--text3); transition: color .15s; }
+    [data-project]:hover .more, [data-project]:focus-visible .more { color: var(--accent); }
+
+    /* detail modal */
+    dialog.detail {
+      width: min(720px, calc(100vw - 32px)); max-height: calc(100vh - 48px);
+      margin: auto; padding: 0; border: 1px solid var(--border2); border-radius: 12px;
+      background: var(--bg2); color: var(--text); overflow: hidden;
+    }
+    dialog.detail[open] { display: flex; flex-direction: column; animation: pop .16s ease-out; }
+    dialog.detail::backdrop { background: rgba(1,4,9,.72); backdrop-filter: blur(2px); }
+    @keyframes pop { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .dlg-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; padding: 1.25rem 1.5rem 1rem; border-bottom: 1px solid var(--border); }
+    .dlg-title { font-family: var(--mono); font-size: 18px; font-weight: 500; color: var(--accent); line-height: 1.35; }
+    .dlg-sub { font-size: 13px; color: var(--text2); margin-top: 4px; }
+    .dlg-close {
+      flex-shrink: 0; width: 32px; height: 32px; border-radius: 6px; cursor: pointer;
+      border: 1px solid var(--border2); background: var(--bg3); color: var(--text2); font-size: 18px; line-height: 1;
+    }
+    .dlg-close:hover { color: var(--text); border-color: var(--text3); }
+    .dlg-body { padding: 1.25rem 1.5rem 1.5rem; overflow-y: auto; }
+    .dlg-body h4 { font-family: var(--mono); font-size: 11.5px; font-weight: 500; color: var(--text3); letter-spacing: .06em; text-transform: uppercase; margin: 1.4rem 0 .6rem; }
+    .dlg-body h4:first-child { margin-top: 0; }
+    .dlg-body p { font-size: 14px; color: var(--text2); line-height: 1.8; }
+    .dlg-body ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .dlg-body li { font-size: 13.5px; color: var(--text2); padding-left: 16px; position: relative; line-height: 1.7; }
+    .dlg-body li::before { content: "›"; position: absolute; left: 2px; color: var(--green); font-family: var(--mono); }
+    .dlg-body li b { color: var(--text); font-weight: 500; }
+    .dlg-body .metrics { grid-template-columns: repeat(4, 1fr); }
+    .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-family: var(--mono); font-size: 12px; }
+    .flow span { padding: 3px 9px; border: 1px solid var(--border2); border-radius: 4px; background: var(--bg); color: var(--text2); }
+    .flow i { color: var(--text3); font-style: normal; }
+    .dlg-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.4rem; }
+    body.modal-open { overflow: hidden; }
+    @media (max-width: 680px) {
+      .dlg-head, .dlg-body { padding-left: 1.1rem; padding-right: 1.1rem; }
+      .dlg-body .metrics { grid-template-columns: 1fr 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) { dialog.detail[open] { animation: none; } }
+
+    footer { padding: 2.5rem 0 0; text-align: center; font-family: var(--mono); font-size: 12px; color: var(--text3); }
+
+    @media (max-width: 680px) {
+      nav { padding: 0 16px; }
+      .wrap { padding: 1.5rem 16px 3rem; }
+      .header { flex-direction: column; gap: 1.25rem; }
+      .avatar { width: 84px; height: 84px; }
+      .name { font-size: 21px; }
+      .name-ko { display: block; margin: 2px 0 0; }
+      .featured { padding: 1.15rem; }
+      .featured-grid { grid-template-columns: 1fr; }
+      .skills { grid-template-columns: 1fr; gap: 4px; }
+      .skill-label { margin-top: 8px; }
+      .tl-item { flex-direction: column; gap: 2px; }
+      .tl-year { width: auto; padding-top: 0; }
     }
   </style>
 </head>
@@ -177,180 +252,214 @@
   <div class="nav-inner">
     <span class="nav-logo">~/galgalrobot</span>
     <div class="nav-links">
+      <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
-      <a href="#education">Education</a>
+      <a href="#experience">Experience</a>
       <a href="#certs">Certs</a>
     </div>
   </div>
 </nav>
 
-<div class="wrap">
+<main class="wrap">
 
   <!-- Header -->
-  <div class="header">
+  <header class="header">
     <div class="avatar">
-      <img src="https://avatars.githubusercontent.com/u/113568273?v=4" alt="권준희 프로필 사진" />
+      <img src="https://avatars.githubusercontent.com/u/113568273?v=4" alt="권준희 프로필 사진" width="112" height="112" />
     </div>
     <div class="header-info">
-      <div class="name">Junhui Kwon <span class="name-ko">권준희</span></div>
-      <div class="handle">@galgalrobot</div>
+      <h1 class="name">Junhui Kwon <span class="name-ko">권준희</span></h1>
+      <p class="role">Cloud · Infrastructure · Data Engineering</p>
       <div class="meta">
         <span class="meta-item">
-          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 5.5A3.5 3.5 0 0 1 5.5 2h5A3.5 3.5 0 0 1 14 5.5v5a3.5 3.5 0 0 1-3.5 3.5h-5A3.5 3.5 0 0 1 2 10.5v-5Zm3.5-2a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h5a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2h-5Z"/></svg>
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.693 1.066a.747.747 0 0 1 .614 0l7.25 3.25a.75.75 0 0 1 0 1.368L13 6.831v2.794c0 1.024-.81 1.749-1.66 2.173-.893.447-2.075.702-3.34.702-.278 0-.55-.012-.816-.036a.75.75 0 0 1 .133-1.494c.22.02.45.03.683.03 1.082 0 2.025-.221 2.67-.543.69-.345.83-.682.83-.832V7.503L8.307 8.934a.747.747 0 0 1-.614 0L4 7.28v1.663c.296.105.575.275.812.512.438.438.688 1.059.688 1.796v3a.75.75 0 0 1-.75.75h-3a.75.75 0 0 1-.75-.75v-3c0-.737.25-1.358.688-1.796.237-.237.516-.407.812-.512V6.606L.443 5.684a.75.75 0 0 1 0-1.368ZM2.583 5 8 7.428 13.416 5 8 2.572ZM2.5 11.25v2.25H4v-2.25c0-.388-.125-.611-.25-.735a.697.697 0 0 0-.5-.203.707.707 0 0 0-.5.203c-.125.124-.25.347-.25.735Z"/></svg>
           Konkuk University, CSE · 3rd year
         </span>
         <span class="meta-item">
-          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Zm7-3.25v2.992l2.028.812a.75.75 0 0 1-.557 1.392l-2.5-1A.751.751 0 0 1 7 8.25v-3.5a.75.75 0 0 1 1.5 0Z"/></svg>
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="m12.596 11.596-3.535 3.536a1.5 1.5 0 0 1-2.122 0l-3.535-3.536a6.5 6.5 0 1 1 9.192-9.193 6.5 6.5 0 0 1 0 9.193Zm-1.06-8.132v-.001a5 5 0 1 0-7.072 7.072L8 14.07l3.536-3.534a5 5 0 0 0 0-7.072ZM8 9a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 9Z"/></svg>
           Seoul, Korea
         </span>
       </div>
       <p class="bio">
-        CS undergraduate at Konkuk University passionate about cybersecurity — particularly
-        embedded systems security, vehicle / defense-oriented research.
-        I build infrastructure, write systems code, and break things to understand how they work.
+        서비스가 <strong>멈추지 않고 돌아가게 하는 인프라</strong>와, 그 위에서 <strong>데이터가 흐르게 하는 파이프라인</strong>에 관심이 있습니다.
+        Docker Compose 기반 AIOps 플랫폼에서 관측 스택과 장애 시나리오, 탐지 시간 측정을 맡았고,
+        AWS 서버리스·EC2 3-Tier 배포와 Kubernetes 클러스터 운영을 직접 해봤습니다.
       </p>
       <div class="icon-links">
         <a class="icon-link" href="https://github.com/galgalrobot" target="_blank" rel="noopener">
-          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
           GitHub
         </a>
         <a class="icon-link" href="mailto:okemerald12@naver.com">
-          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 12.251c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.06l-5.563 3.512a1.75 1.75 0 0 1-1.874 0L1.5 5.06v7.192Zm13-8.865L8.38 7.45a.25.25 0 0 1-.268 0L1.5 3.386v-.136a.25.25 0 0 1 .25-.25h12.5a.25.25 0 0 1 .25.25v.136Z"/></svg>
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 12.251c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.06l-5.563 3.512a1.75 1.75 0 0 1-1.874 0L1.5 5.06v7.192Zm13-8.865L8.38 7.45a.25.25 0 0 1-.268 0L1.5 3.386v-.136a.25.25 0 0 1 .25-.25h12.5a.25.25 0 0 1 .25.25v.136Z"/></svg>
           okemerald12@naver.com
         </a>
       </div>
     </div>
-  </div>
+  </header>
 
-  <!-- Interests -->
-  <section>
-    <div class="sec-title">Research Interests</div>
-    <div class="tags">
-      <span class="tag blue">Intrusion Detection</span>
-      <span class="tag green">Systems Programming</span>
-      <span class="tag green">Infrastructure & DevOps</span>
-      <span class="tag green">AIOps</span>
-      <span class="tag">Defense Industry</span>
-      <span class="tag">Linux / eBPF</span>
+  <!-- Skills -->
+  <section id="skills">
+    <h2 class="sec-title">Skills</h2>
+    <div class="skills">
+      <span class="skill-label">Cloud</span>
+      <div class="tags">
+        <span class="tag blue">AWS</span><span class="tag">EC2</span><span class="tag">Lambda</span><span class="tag">DynamoDB</span><span class="tag">RDS</span><span class="tag">S3</span><span class="tag">Athena</span><span class="tag blue">Terraform</span>
+      </div>
+      <span class="skill-label">Infra / Ops</span>
+      <div class="tags">
+        <span class="tag green">Docker Compose</span><span class="tag green">Kubernetes</span><span class="tag">Calico CNI</span><span class="tag">Prometheus</span><span class="tag">Loki</span><span class="tag">Grafana</span><span class="tag">Alertmanager</span><span class="tag">Linux</span>
+      </div>
+      <span class="skill-label">Data</span>
+      <div class="tags">
+        <span class="tag">PostgreSQL</span><span class="tag">SQL</span><span class="tag">Kafka</span><span class="tag">Spark</span><span class="tag">Airflow</span>
+      </div>
+      <span class="skill-label">Backend</span>
+      <div class="tags">
+        <span class="tag">Java · Spring Boot</span><span class="tag">Python · FastAPI</span><span class="tag">Node.js</span><span class="tag">Django</span>
+      </div>
     </div>
   </section>
 
   <!-- Projects -->
   <section id="projects">
-    <div class="sec-title">Projects</div>
+    <h2 class="sec-title">Projects</h2>
+
+    <article class="featured" data-project="aiops" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Leafy AIOps 자세히 보기">
+      <div class="proj-header">
+        <span class="proj-icon">🌿</span>
+        <h3 class="proj-name">Leafy AIOps</h3>
+        <span class="badge live">졸업 프로젝트 · 진행 중</span>
+      </div>
+      <p class="proj-meta">2인 팀 · 담당: 인프라, 장애 시나리오, 검증기, 자동 복구 에이전트</p>
+      <div class="featured-grid">
+        <ul>
+          <li>Prometheus · Loki · Grafana · Alertmanager 관측 스택에 Ollama(Llama 3.1 8B)를 연결한 Docker Compose 기반 AIOps 플랫폼</li>
+          <li>서비스망(leafy-net)과 관리망(mgmt-net)을 분리한 이중 네트워크 구성</li>
+          <li>CPU 과부하·메모리 누수·OOM 재시작부터 SQL Injection·데이터 유출까지 장애/공격 시나리오 9종을 자동화하고 검증</li>
+          <li>탐지(MTTD)·인지(MTTA) 시간을 자동 측정하는 검증기와 FastAPI 기반 자동 복구 에이전트 구현</li>
+        </ul>
+        <div class="metrics">
+          <div class="metric"><div class="metric-val">9</div><div class="metric-label">검증한 시나리오</div></div>
+          <div class="metric"><div class="metric-val">2</div><div class="metric-label">분리된 Docker 네트워크</div></div>
+          <div class="metric"><div class="metric-val">64.8s</div><div class="metric-label">MTTD · cpu_stress</div></div>
+          <div class="metric"><div class="metric-val">112.3s</div><div class="metric-label">MTTA · cpu_stress</div></div>
+        </div>
+      </div>
+      <div class="proj-tags">
+        <span class="proj-tag">Docker Compose</span><span class="proj-tag">Prometheus</span><span class="proj-tag">Loki</span><span class="proj-tag">Grafana</span><span class="proj-tag">Ollama</span><span class="proj-tag">FastAPI</span><span class="proj-tag">Python</span>
+      </div>
+      <div class="more">자세히 보기 →</div>
+    </article>
+
     <div class="projects">
 
-      <div class="proj">
+      <article class="proj" data-project="minegram" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Minegram 자세히 보기">
         <div class="proj-header">
-          <span class="proj-icon">🌿</span>
-          <span class="proj-name">Leafy AIOps</span>
+          <span class="proj-icon">⛏️</span>
+          <h3 class="proj-name">Minegram</h3>
+          <span class="badge live">진행 중</span>
         </div>
-        <div class="proj-desc">
-          Prometheus / Loki / AlertManager 기반 모니터링 인프라에 Ollama + Llama 3.1 LLM을 연동한 AIOps 시스템. Docker Compose 환경에서 공격 시나리오 자동화 및 이상 감지 파이프라인 구축.
-        </div>
+        <p class="proj-meta">2인 팀 · 풀스택</p>
+        <p class="proj-desc">
+          마인크래프트 테마 커뮤니티. DM은 ECDH P-256과 간소화한 Double Ratchet으로 종단간 암호화하고,
+          CI에 Trivy·Semgrep·OWASP ZAP·SBOM 생성을 붙였습니다. 노션 티켓 보드와 GitHub Actions를 연동해 PR 상태를 동기화합니다.
+        </p>
         <div class="proj-tags">
-          <span class="proj-tag">Docker Compose</span>
-          <span class="proj-tag">Prometheus</span>
-          <span class="proj-tag">Loki</span>
-          <span class="proj-tag">Ollama</span>
-          <span class="proj-tag">Llama 3.1</span>
-          <span class="proj-tag">Python</span>
+          <span class="proj-tag">Spring Boot</span><span class="proj-tag">PostgreSQL</span><span class="proj-tag">React · Vite</span><span class="proj-tag">Docker Compose</span><span class="proj-tag">GitHub Actions</span>
         </div>
-      </div>
+        <div class="more">자세히 보기 →</div>
+      </article>
 
-      <div class="proj">
+      <article class="proj" data-project="leafy" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Leafy 자세히 보기">
         <div class="proj-header">
           <span class="proj-icon">🪴</span>
-          <span class="proj-name">Leafy</span>
+          <h3 class="proj-name">Leafy</h3>
         </div>
-        <div class="proj-desc">
-          Spring Boot + PostgreSQL 기반 식물 관리 서비스. 카카오 OAuth 로그인과 Plant.id API를 연동해 식물 식별·관리 기능을 제공. AWS EC2에 3-Tier 아키텍처로 배포하고 Docker로 컨테이너화.
-        </div>
+        <p class="proj-meta">팀 프로젝트 · 백엔드</p>
+        <p class="proj-desc">
+          반려식물 관리 서비스. 카카오 OAuth 로그인과 Plant.id API로 식물 식별을 붙이고,
+          Docker로 컨테이너화해 AWS EC2에 3-Tier 구조로 배포했습니다.
+        </p>
         <div class="proj-tags">
-          <span class="proj-tag">Spring Boot</span>
-          <span class="proj-tag">PostgreSQL</span>
-          <span class="proj-tag">AWS EC2</span>
-          <span class="proj-tag">Docker</span>
-          <span class="proj-tag">Kakao OAuth</span>
-          <span class="proj-tag">Plant.id API</span>
+          <span class="proj-tag">Spring Boot</span><span class="proj-tag">PostgreSQL</span><span class="proj-tag">AWS EC2</span><span class="proj-tag">Docker</span><span class="proj-tag">Kakao OAuth</span>
         </div>
-      </div>
+        <div class="more">자세히 보기 →</div>
+      </article>
 
-      <div class="proj">
-        <div class="proj-header">
-          <span class="proj-icon">📦</span>
-          <span class="proj-name">물품 대여 서비스</span>
-        </div>
-        <div class="proj-desc">
-          Java 기반 CLI 물품 대여 관리 시스템 (전공기초프로젝트, 팀 프로젝트). MVC 계층 구조로 설계하고, 가상 시간·페널티·예약 관리 기능을 구현.
-        </div>
-        <div class="proj-tags">
-          <span class="proj-tag">Java</span>
-          <span class="proj-tag">MVC</span>
-          <span class="proj-tag">CLI</span>
-        </div>
-      </div>
-
-      <div class="proj">
+      <article class="proj" data-project="walking" tabindex="0" role="button" aria-haspopup="dialog" aria-label="KU-SmartWalkingTour 자세히 보기">
         <div class="proj-header">
           <span class="proj-icon">🗺️</span>
-          <span class="proj-name">KU-SmartWalkingTour</span>
+          <h3 class="proj-name">KU-SmartWalkingTour</h3>
         </div>
-        <div class="proj-desc">
-          AWS Serverless 기반 건국대 스마트 관광 가이드 API. Lambda + DynamoDB 아키텍처로 무중단 확장 가능한 백엔드 구축.
-        </div>
+        <p class="proj-meta">팀 프로젝트 · 공공데이터 활용</p>
+        <p class="proj-desc">
+          공공데이터를 활용한 건국대 주변 둘레길 안내 API. Lambda와 DynamoDB로 서버를 두지 않는 백엔드를 구성했습니다.
+        </p>
         <div class="proj-tags">
-          <span class="proj-tag">AWS Lambda</span>
-          <span class="proj-tag">DynamoDB</span>
-          <span class="proj-tag">Node.js</span>
-          <span class="proj-tag">Serverless</span>
+          <span class="proj-tag">AWS Lambda</span><span class="proj-tag">DynamoDB</span><span class="proj-tag">Node.js</span><span class="proj-tag">Serverless</span>
         </div>
-      </div>
+        <div class="more">자세히 보기 →</div>
+      </article>
 
-      <div class="proj">
+      <article class="proj" data-project="laundry" tabindex="0" role="button" aria-haspopup="dialog" aria-label="세탁매니저 자세히 보기">
         <div class="proj-header">
           <span class="proj-icon">🧺</span>
-          <span class="proj-name">세탁매니저</span>
+          <h3 class="proj-name">세탁매니저</h3>
         </div>
-        <div class="proj-desc">
-          20대를 위한 세탁 정보 추천 플랫폼. Naver CLOVA OCR로 세탁 라벨 인식 후 맞춤 세탁법 제공.
-        </div>
+        <p class="proj-meta">팀 프로젝트</p>
+        <p class="proj-desc">
+          20대를 위한 세탁 정보 플랫폼. Naver CLOVA OCR로 세탁 라벨을 인식해 맞춤 세탁법을 알려줍니다.
+        </p>
         <div class="proj-tags">
-          <span class="proj-tag">Django</span>
-          <span class="proj-tag">Naver CLOVA OCR</span>
-          <span class="proj-tag">JavaScript</span>
+          <span class="proj-tag">Django</span><span class="proj-tag">Naver CLOVA OCR</span><span class="proj-tag">JavaScript</span>
         </div>
-      </div>
+        <div class="more">자세히 보기 →</div>
+      </article>
+
+      <article class="proj" data-project="rental" tabindex="0" role="button" aria-haspopup="dialog" aria-label="물품 대여 서비스 자세히 보기">
+        <div class="proj-header">
+          <span class="proj-icon">📦</span>
+          <h3 class="proj-name">물품 대여 서비스</h3>
+        </div>
+        <p class="proj-meta">전공기초프로젝트 · 팀</p>
+        <p class="proj-desc">
+          Java CLI 물품 대여 관리 시스템. MVC 계층으로 설계하고 가상 시간·페널티·예약 관리를 구현했습니다.
+        </p>
+        <div class="proj-tags">
+          <span class="proj-tag">Java</span><span class="proj-tag">MVC</span><span class="proj-tag">CLI</span>
+        </div>
+        <div class="more">자세히 보기 →</div>
+      </article>
 
     </div>
   </section>
 
-  <!-- Education -->
-  <section id="education">
-    <div class="sec-title">Education / Experience</div>
+  <!-- Experience -->
+  <section id="experience">
+    <h2 class="sec-title">Education / Experience</h2>
     <div class="timeline">
       <div class="tl-item">
         <div class="tl-year">2024 –</div>
-        <div class="tl-content">
+        <div>
           <div class="tl-title">건국대학교 컴퓨터공학부</div>
-          <div class="tl-sub">Konkuk University · B.S. Computer Science & Engineering</div>
-          <div class="tl-detail">
-            컴퓨터 구조 · 컴퓨터 네트워크 · 데이터베이스 · 머신러닝
-          </div>
+          <div class="tl-sub">Konkuk University · B.S. Computer Science &amp; Engineering</div>
+          <div class="tl-detail">컴퓨터 구조 · 컴퓨터 네트워크 · 데이터베이스 · 소프트웨어 아키텍처 · 차세대분산시스템 · 머신러닝</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2026 –</div>
+        <div>
+          <div class="tl-title">BOAZ 빅데이터 연합동아리</div>
+          <div class="tl-sub">엔지니어링 부문 · Kubernetes, Kafka, Spark, Airflow</div>
         </div>
       </div>
       <div class="tl-item">
         <div class="tl-year">2025</div>
-        <div class="tl-content">
-          <div class="tl-title">SeSAC AI 클라우드 & 보안 전문가 양성캠프</div>
-          <div class="tl-sub">4개월 과정 · Ubuntu · Splunk · Docker · Kubernetes</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">2026 -</div>
-        <div class="tl-content">
-          <div class="tl-title">BOAZ 동아리</div>
-          <div class="tl-sub">엔지니어링 부문 - k8s, kafka, Spark, Airflow</div>
+        <div>
+          <div class="tl-title">SeSAC AI 클라우드 &amp; 보안 전문가 양성캠프</div>
+          <div class="tl-sub">4개월 과정</div>
+          <div class="tl-detail">Ubuntu 3-Tier 인프라 구축 · Splunk · kubeadm Kubernetes 클러스터 구성과 Calico CNI 트러블슈팅</div>
         </div>
       </div>
     </div>
@@ -358,18 +467,208 @@
 
   <!-- Certifications -->
   <section id="certs">
-    <div class="sec-title">Certifications</div>
-    <div class="certs">
-      <span class="cert">리눅스마스터 2급</span>
-      <span class="cert">네트워크관리사 2급</span>
-      <span class="cert">ADsP</span>
+    <h2 class="sec-title">Certifications</h2>
+    <div class="cert-groups">
+      <div class="cert-group">
+        <div class="cert-group-title">AWS</div>
+        <ul class="cert-list">
+          <li class="cert new"><span class="cert-name">AWS Certified Cloud Practitioner</span><span class="cert-code">CLF-C02</span></li>
+          <li class="cert new"><span class="cert-name">AWS Certified AI Practitioner</span><span class="cert-code">AIF-C01</span></li>
+        </ul>
+      </div>
+      <div class="cert-group">
+        <div class="cert-group-title">국가기술 · 국가공인</div>
+        <ul class="cert-list">
+          <li class="cert"><span class="cert-name">정보처리산업기사</span><span class="cert-code">Q-Net</span></li>
+          <li class="cert"><span class="cert-name">리눅스마스터 2급</span><span class="cert-code">KAIT</span></li>
+          <li class="cert"><span class="cert-name">네트워크관리사 2급</span><span class="cert-code">ICQA</span></li>
+          <li class="cert"><span class="cert-name">ADsP 데이터분석 준전문가</span><span class="cert-code">K-DATA</span></li>
+        </ul>
+      </div>
     </div>
   </section>
 
-  <footer>
-    <p>© 2026 Junhui Kwon · <a href="https://github.com/galgalrobot">galgalrobot</a> · Built with GitHub Pages</p>
-  </footer>
+</main>
 
-</div>
+<footer class="wrap" style="padding-top:0">
+  <p>© 2026 Junhui Kwon · <a href="https://github.com/galgalrobot">galgalrobot</a> · Built with GitHub Pages</p>
+</footer>
+
+<!-- ===== 프로젝트 상세 (카드 클릭 시 표시) ===== -->
+<dialog class="detail" id="detail" aria-labelledby="dlg-title">
+  <div class="dlg-head">
+    <div>
+      <h3 class="dlg-title" id="dlg-title"></h3>
+      <p class="dlg-sub" id="dlg-sub"></p>
+    </div>
+    <button class="dlg-close" type="button" aria-label="닫기">×</button>
+  </div>
+  <div class="dlg-body" id="dlg-body"></div>
+</dialog>
+
+<template id="p-aiops" data-title="🌿 Leafy AIOps" data-sub="졸업 프로젝트 · 2인 팀 · 진행 중">
+  <h4>개요</h4>
+  <p>장애가 나면 관측 스택이 이상을 잡고, LLM이 원인을 분석해 복구 조치까지 이어가는 AIOps 플랫폼입니다. Docker Compose로 서비스와 관측·분석 계층을 한 번에 띄우고, 장애를 일부러 일으켜 탐지부터 대응까지 걸리는 시간을 측정합니다.</p>
+  <h4>동작 흐름</h4>
+  <div class="flow"><span>장애 주입</span><i>→</i><span>Prometheus · Loki 수집</span><i>→</i><span>Alertmanager 알림</span><i>→</i><span>LLM 분석 (Llama 3.1 8B)</span><i>→</i><span>복구 에이전트</span><i>→</i><span>검증기 · MTTD/MTTA</span></div>
+  <h4>내 역할</h4>
+  <ul>
+    <li><b>인프라</b>: 서비스망(leafy-net)과 관리망(mgmt-net)을 분리한 이중 네트워크 Docker Compose 구성</li>
+    <li><b>장애 시나리오</b>: cpu_stress, memory_leak, container_oom_restart, sql_injection, lateral_movement, secret_dump, data_exfil, brute_force/PGMiner 체인 등 9종 자동화</li>
+    <li><b>검증기</b>: 시나리오 시작부터 탐지(MTTD)·인지(MTTA)까지 시간을 자동 측정</li>
+    <li><b>복구 에이전트</b>: FastAPI 기반 자동 조치 구현</li>
+    <li><b>로깅</b>: 2학기에 웹 애플리케이션 로깅과 네트워크 계층 수집을 담당</li>
+  </ul>
+  <h4>결과</h4>
+  <div class="metrics">
+    <div class="metric"><div class="metric-val">9</div><div class="metric-label">검증한 시나리오</div></div>
+    <div class="metric"><div class="metric-val">2</div><div class="metric-label">분리된 네트워크</div></div>
+    <div class="metric"><div class="metric-val">64.8s</div><div class="metric-label">MTTD · cpu_stress</div></div>
+    <div class="metric"><div class="metric-val">112.3s</div><div class="metric-label">MTTA · cpu_stress</div></div>
+  </div>
+  <h4>기술</h4>
+  <div class="proj-tags"><span class="proj-tag">Docker Compose</span><span class="proj-tag">Prometheus</span><span class="proj-tag">Loki</span><span class="proj-tag">Grafana</span><span class="proj-tag">Alertmanager</span><span class="proj-tag">Ollama</span><span class="proj-tag">FastAPI</span><span class="proj-tag">Python</span></div>
+</template>
+
+<template id="p-minegram" data-title="⛏️ Minegram" data-sub="2인 팀 · 풀스택 · 진행 중">
+  <h4>개요</h4>
+  <p>마인크래프트 유저를 위한 커뮤니티 웹앱입니다. 반응형 웹 하나로 PC와 모바일을 모두 지원하고, 게시판·DM·캐릭터 꾸미기·미니홈피형 마이홈을 제공합니다.</p>
+  <h4>주요 기능</h4>
+  <ul>
+    <li><b>마크 MBTI</b>: 질문 몇 개로 크리퍼·엔더맨 같은 몹 타입을 정하고, 스킨·모드·시드를 추천</li>
+    <li><b>아바타 스킨 도안</b>: 각진 캐릭터에 텍스처 조각을 입히면 합성 결과가 그대로 스킨이 되는 방식</li>
+    <li><b>게시판</b>: 자유·서버·모드·스킨·시드·뉴비·정보 게시판과 인기글, 아바타를 전시하는 명예의 전당</li>
+    <li><b>마이홈</b>: 경험치·상점·다이어리·방명록·미니룸·일촌 기능</li>
+    <li><b>DM</b>: 회원 전용, 종단간 암호화</li>
+  </ul>
+  <h4>설계 포인트</h4>
+  <ul>
+    <li><b>E2E 암호화</b>: ECDH P-256 키 교환과 간소화한 Double Ratchet으로 서버가 DM 내용을 볼 수 없게 설계</li>
+    <li><b>게스트 → 회원 승계</b>: 비회원이 만든 MBTI 결과·캐릭터를 게스트 토큰으로 보관했다가 가입 시 그대로 이전</li>
+    <li><b>DevSecOps CI</b>: Trivy, Semgrep, OWASP ZAP 스캔과 SBOM 생성을 파이프라인에 연결</li>
+    <li><b>협업 자동화</b>: 브랜치명의 티켓 ID로 PR 상태를 노션 스프린트 보드에 동기화하고 디스코드로 알림</li>
+  </ul>
+  <h4>기술</h4>
+  <div class="proj-tags"><span class="proj-tag">Spring Boot</span><span class="proj-tag">PostgreSQL</span><span class="proj-tag">React 18</span><span class="proj-tag">Vite</span><span class="proj-tag">Tailwind</span><span class="proj-tag">Docker Compose</span><span class="proj-tag">GitHub Actions</span></div>
+</template>
+
+<template id="p-leafy" data-title="🪴 Leafy" data-sub="팀 프로젝트 · 백엔드">
+  <h4>개요</h4>
+  <p>반려식물을 등록하고 키우는 과정을 기록·관리해주는 서비스입니다. 사진으로 식물을 식별하고, 날씨에 맞춘 관리 알림과 건강 진단을 제공합니다.</p>
+  <h4>주요 기능</h4>
+  <ul>
+    <li>카카오 소셜 로그인</li>
+    <li>사진 기반 식물 등록·식별 (Plant.id)</li>
+    <li>AI 건강 진단과 성장일지 타임라인</li>
+    <li>관리 캘린더와 알림 (카카오 알림톡, 기상청 날씨 연동)</li>
+    <li>맞춤 식물 추천, 카카오맵 구매처 찾기</li>
+  </ul>
+  <h4>내 역할</h4>
+  <ul>
+    <li>식물 등록·식별, AI 건강 진단, 성장일지, 관리 캘린더 구현</li>
+    <li>카카오 소셜 로그인과 카카오맵 API 연동</li>
+  </ul>
+  <h4>아키텍처</h4>
+  <p>3계층 구조에서 애플리케이션 계층을 인증·계정·기록·관리·탐색·기반 6개 도메인 모듈로 나눴습니다. Docker로 컨테이너화해 AWS에 배포했고, 아키텍처·모듈 정의·시퀀스 다이어그램·ERD를 설계서로 정리했습니다.</p>
+  <h4>기술</h4>
+  <div class="proj-tags"><span class="proj-tag">Spring Boot</span><span class="proj-tag">PostgreSQL</span><span class="proj-tag">JWT · OAuth2</span><span class="proj-tag">AWS EC2</span><span class="proj-tag">S3</span><span class="proj-tag">Docker</span><span class="proj-tag">GitHub Actions</span></div>
+</template>
+
+<template id="p-walking" data-title="🗺️ KU-SmartWalkingTour" data-sub="팀 프로젝트 · 공공데이터 활용 · 2025.12">
+  <h4>개요</h4>
+  <p>위치를 기준으로 주변 둘레길(산책 코스)을 추천하는 스마트시티 서비스입니다. 코스와 함께 날씨·대기질, 근처 의료시설을 한 화면에서 보여줍니다.</p>
+  <h4>주요 기능</h4>
+  <ul>
+    <li>위치 기반 코스 조회·저장·추천, GPX 경로 제공</li>
+    <li>기상청 초단기예보와 대기질(에어코리아, Open-Meteo) 통합 조회</li>
+    <li>근처 의료시설 표시, 이메일 인증 회원가입</li>
+  </ul>
+  <h4>아키텍처</h4>
+  <div class="flow"><span>Route 53</span><i>→</i><span>API Gateway</span><i>→</i><span>Lambda (Auth · User · Course · Weather · UserCourses)</span><i>→</i><span>DynamoDB</span></div>
+  <ul style="margin-top:10px">
+    <li>도메인별로 Lambda와 테이블을 나눈 database-per-service 구조</li>
+    <li>RDS에서 DynamoDB로 전면 이전하고 SST(Serverless Stack)로 배포</li>
+    <li>GPX 파일은 S3, 인증 메일은 SES, 비밀값은 Secrets Manager로 관리</li>
+  </ul>
+  <h4>기술</h4>
+  <div class="proj-tags"><span class="proj-tag">AWS Lambda</span><span class="proj-tag">API Gateway</span><span class="proj-tag">DynamoDB</span><span class="proj-tag">S3</span><span class="proj-tag">SES</span><span class="proj-tag">SST</span><span class="proj-tag">Node.js</span></div>
+  <div class="dlg-links">
+    <a class="icon-link" href="https://github.com/KU-cloudwebservice-team10/serverless-api" target="_blank" rel="noopener">repo →</a>
+  </div>
+</template>
+
+<template id="p-laundry" data-title="🧺 세탁매니저" data-sub="팀 프로젝트">
+  <h4>개요</h4>
+  <p>세탁 라벨 기호를 읽기 어려운 20대를 위한 세탁 정보 플랫폼입니다. 라벨 사진을 올리면 기호를 인식해 옷에 맞는 세탁법을 알려줍니다.</p>
+  <h4>주요 기능</h4>
+  <ul>
+    <li>Naver CLOVA OCR로 세탁 라벨 인식</li>
+    <li>인식 결과에 따른 맞춤 세탁법 안내</li>
+  </ul>
+  <h4>기술</h4>
+  <div class="proj-tags"><span class="proj-tag">Django</span><span class="proj-tag">Naver CLOVA OCR</span><span class="proj-tag">JavaScript</span></div>
+</template>
+
+<template id="p-rental" data-title="📦 물품 대여 서비스" data-sub="전공기초프로젝트 · 팀">
+  <h4>개요</h4>
+  <p>콘솔에서 동작하는 물품 대여 관리 시스템입니다. 대여·반납·예약 흐름과 연체 페널티를 다룹니다.</p>
+  <h4>주요 기능</h4>
+  <ul>
+    <li>가상 시간을 두고 대여 기간과 연체를 시뮬레이션</li>
+    <li>연체 페널티와 예약 관리</li>
+    <li>Model·View·Controller 계층으로 나눈 구조</li>
+  </ul>
+  <h4>기술</h4>
+  <div class="proj-tags"><span class="proj-tag">Java</span><span class="proj-tag">MVC</span><span class="proj-tag">CLI</span></div>
+</template>
+
+<script>
+(() => {
+  const dlg = document.getElementById('detail');
+  const titleEl = document.getElementById('dlg-title');
+  const subEl = document.getElementById('dlg-sub');
+  const bodyEl = document.getElementById('dlg-body');
+  let lastFocus = null;
+
+  function open(id, pushHash = true) {
+    const tpl = document.getElementById('p-' + id);
+    if (!tpl) return;
+    titleEl.textContent = tpl.dataset.title;
+    subEl.textContent = tpl.dataset.sub || '';
+    bodyEl.replaceChildren(tpl.content.cloneNode(true));
+    bodyEl.scrollTop = 0;
+    lastFocus = document.activeElement;
+    if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', '');
+    document.body.classList.add('modal-open');
+    if (pushHash) history.replaceState(null, '', '#' + id);
+  }
+
+  function close() {
+    if (dlg.open) dlg.close(); else dlg.removeAttribute('open');
+  }
+
+  dlg.addEventListener('close', () => {
+    document.body.classList.remove('modal-open');
+    if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+    if (lastFocus) lastFocus.focus();
+  });
+  dlg.querySelector('.dlg-close').addEventListener('click', close);
+  dlg.addEventListener('click', e => { if (e.target === dlg) close(); });
+
+  document.querySelectorAll('[data-project]').forEach(card => {
+    card.addEventListener('click', e => {
+      if (e.target.closest('a')) return;
+      open(card.dataset.project);
+    });
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(card.dataset.project); }
+    });
+  });
+
+  const initial = location.hash.slice(1);
+  if (initial && document.getElementById('p-' + initial)) open(initial, false);
+})();
+</script>
+
 </body>
 </html>
